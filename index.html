@@ -1,0 +1,84 @@
+<html>	
+    <body>
+        <div id='container'>
+		    <canvas id="canvas">
+		    </canvas>
+        </div>
+	</body>
+</html>
+
+<script>
+const name = {}
+window.onload = draw();
+function draw() {
+    var canvas = document.getElementById('canvas');
+    canvas.width = '720';
+    canvas.height = '1280';
+    if (canvas.getContext) {
+    var ctx = canvas.getContext('2d');
+	    function form() {
+		    ctx.clearRect(0,0, canvas.width, canvas.height);
+			var grd = ctx.createLinearGradient(0, 0, 0, 500);
+            grd.addColorStop(1, '#f5d033');
+            grd.addColorStop(0, '#cc0000');			
+            ctx.beginPath();
+			ctx.strokeStyle = '#ff9999';
+			ctx.lineWidth = '12';
+            ctx.moveTo(50, 100);
+            ctx.quadraticCurveTo(100, name.vd, 150, 100);
+            ctx.quadraticCurveTo(200, name.vd2, 250, 100);
+            ctx.quadraticCurveTo(300, name.vd3, 350, 100);
+			ctx.stroke();
+            ctx.lineTo(350, 500);
+            ctx.lineTo(50, 500);
+            ctx.lineTo(50, 100);
+            ctx.fillStyle = grd;			
+            ctx.fill();	
+
+			var grd2 = ctx.createLinearGradient(0, 0, 0, 500);
+            grd2.addColorStop(1, '#33ccff');
+            grd2.addColorStop(0, '#fff');				
+            ctx.beginPath();
+			ctx.strokeStyle = '#ff9999';
+			ctx.lineWidth = '7';
+            ctx.moveTo(400, 100);
+            ctx.quadraticCurveTo(550, name.vd2, 600, 100);
+            ctx.quadraticCurveTo(650, name.vd3, 700, 100);
+            ctx.lineTo(700, 500);
+            ctx.lineTo(400, 500);
+            ctx.lineTo(400, 100);
+            ctx.fillStyle = grd2;			
+            ctx.fill();				
+	    }
+		
+		function quatro(t1, t2, v, n) {
+		    name[v] = n;
+		    dec0();	    
+		    function dec0() {
+	            var si0 = setInterval(function() {				    
+	                name[v] -= 2;
+                    if (name[v] < 60) {	
+			            clearInterval(si0);
+				        inc0();
+                    }
+                    form();		
+	            }, t1);
+		    }
+		
+		    function inc0() {
+	            var si1 = setInterval(function() {
+	                name[v] += 2;
+                    if (name[v] > 140) {	
+			            clearInterval(si1);
+					    dec0();
+                    }
+                    form();		
+	            }, t2);	
+            }
+        }			
+        quatro(50, 50, 'vd', 60);
+        quatro(50, 50, 'vd2', 140);
+        quatro(50, 50, 'vd3', 60);
+    }
+}
+</script>	
